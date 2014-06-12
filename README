@@ -7,15 +7,15 @@
 +-------------------+----------------------------------------------------------+
 | **Author**        | Nikolaos Kavvadias                                       |
 +-------------------+----------------------------------------------------------+
-| **Contact**       | nkavv@uop.gr                                             |
+| **Contact**       | nikos@nkavvadias.com                                     |
 |                   |                                                          |
 |                   | nikolaos.kavvadias@gmail.com                             |
 +-------------------+----------------------------------------------------------+
 | **Website**       | http://www.nkavvadias.com                                |
 +-------------------+----------------------------------------------------------+
-| **Release Date**  | 28 April 2013                                            |
+| **Release Date**  | 12 June 2014                                             |
 +-------------------+----------------------------------------------------------+
-| **Version**       | 0.0.7                                                    |
+| **Version**       | 0.0.8                                                    |
 +-------------------+----------------------------------------------------------+
 | **Rev. history**  |                                                          |
 +-------------------+----------------------------------------------------------+
@@ -48,6 +48,11 @@
 |                   |                                                          |
 |                   | Converted documentation to RestructuredText.             |
 +-------------------+----------------------------------------------------------+
+|        **v0.0.8** | 12-06-2014                                               |
+|                   |                                                          |
+|                   | Updated contact information. Replaced COPYING.BSD by     |
+|                   | LICENSE.                                                 |
++-------------------+----------------------------------------------------------+
 
 .. _Link: http://to-be-determined
 
@@ -73,11 +78,11 @@ capital S are not available in binary releases of kdiv:
 +---------------------+--------------------------------------------------------+
 |   **S** build.sh    | Build script for kdiv (source only).                   |
 |                     |                                                        |
-|   **S** COPYING.BSD | Description of the Modified BSD license.               |
-|                     |                                                        |
 |   **S** kdiv.c      | The source code for the application.                   |
 |                     |                                                        |
 |   kdiv.exe          | Windows or Linux executable for the application.       |
+|                     |                                                        |
+|   **S** LICENSE     | Description of the Modified BSD license.               |
 |                     |                                                        |
 |   **S** Makefile    | Makefile for generating the kdiv executable.           |
 |                     |                                                        |
@@ -269,9 +274,8 @@ In order to build and run a series of sample tests do the following:
 
 You may contact me for further questions/suggestions/corrections at:
 
-|  Nikolaos Kavvadias <nkavv@uop.gr>
+|  Nikolaos Kavvadias <nikos@nkavvadias.com>
 |                     <nikolaos.kavvadias@gmail.com>
 |  http://www.nkavvadias.com
-|  Department of Computer Science and Technology
-|  University of Peloponnese
-|  Tripoli, Greece
+|  Independent Consultant
+|  Lamia, Fthiotis, Greece

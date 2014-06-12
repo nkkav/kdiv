@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.10: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.11: http://docutils.sourceforge.net/" />
 <title>kdiv user manual</title>
 <style type="text/css">
 
 /*
 :Author: David Goodger (goodger@python.org)
-:Id: $Id: html4css1.css 7514 2012-09-14 14:27:12Z milde $
+:Id: $Id$
 :Copyright: This stylesheet has been placed in the public domain.
 
 Default cascading style sheet for the HTML output of Docutils.
@@ -313,6 +313,21 @@ table.docutils th.field-name, table.docinfo th.docinfo-name {
   white-space: nowrap ;
   padding-left: 0 }
 
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
 h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
 h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
   font-size: 100% }
@@ -339,7 +354,7 @@ ul.auto-toc {
 <td>Nikolaos Kavvadias</td>
 </tr>
 <tr><td><strong>Contact</strong></td>
-<td><p class="first"><a class="reference external" href="mailto:nkavv&#64;uop.gr">nkavv&#64;uop.gr</a></p>
+<td><p class="first"><a class="reference external" href="mailto:nikos&#64;nkavvadias.com">nikos&#64;nkavvadias.com</a></p>
 <p class="last"><a class="reference external" href="mailto:nikolaos.kavvadias&#64;gmail.com">nikolaos.kavvadias&#64;gmail.com</a></p>
 </td>
 </tr>
@@ -347,10 +362,10 @@ ul.auto-toc {
 <td><a class="reference external" href="http://www.nkavvadias.com">http://www.nkavvadias.com</a></td>
 </tr>
 <tr><td><strong>Release Date</strong></td>
-<td>28 April 2013</td>
+<td>12 June 2014</td>
 </tr>
 <tr><td><strong>Version</strong></td>
-<td>0.0.7</td>
+<td>0.0.8</td>
 </tr>
 <tr><td><strong>Rev. history</strong></td>
 <td>&nbsp;</td>
@@ -391,6 +406,12 @@ tutorial usage.</p>
 <p class="last">Converted documentation to RestructuredText.</p>
 </td>
 </tr>
+<tr><td><strong>v0.0.8</strong></td>
+<td><p class="first">12-06-2014</p>
+<p class="last">Updated contact information. Replaced COPYING.BSD by
+LICENSE.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <div class="section" id="introduction">
@@ -415,9 +436,9 @@ capital S are not available in binary releases of kdiv:</p>
 <td>Top-level directory</td>
 </tr>
 <tr><td><p class="first"><strong>S</strong> build.sh</p>
-<p><strong>S</strong> COPYING.BSD</p>
 <p><strong>S</strong> kdiv.c</p>
 <p>kdiv.exe</p>
+<p><strong>S</strong> LICENSE</p>
 <p><strong>S</strong> Makefile</p>
 <p>README</p>
 <p>README.html</p>
@@ -427,9 +448,9 @@ capital S are not available in binary releases of kdiv:</p>
 <p class="last">test.sh</p>
 </td>
 <td><p class="first">Build script for kdiv (source only).</p>
-<p>Description of the Modified BSD license.</p>
 <p>The source code for the application.</p>
 <p>Windows or Linux executable for the application.</p>
+<p>Description of the Modified BSD license.</p>
 <p>Makefile for generating the kdiv executable.</p>
 <p>This file.</p>
 <p>HTML version of README.</p>
@@ -597,14 +618,13 @@ int main(int argc, char *argv[]) {
 <h1>8. Contact</h1>
 <p>You may contact me for further questions/suggestions/corrections at:</p>
 <div class="line-block">
-<div class="line">Nikolaos Kavvadias &lt;<a class="reference external" href="mailto:nkavv&#64;uop.gr">nkavv&#64;uop.gr</a>&gt;</div>
+<div class="line">Nikolaos Kavvadias &lt;<a class="reference external" href="mailto:nikos&#64;nkavvadias.com">nikos&#64;nkavvadias.com</a>&gt;</div>
 <div class="line-block">
 <div class="line">&lt;<a class="reference external" href="mailto:nikolaos.kavvadias&#64;gmail.com">nikolaos.kavvadias&#64;gmail.com</a>&gt;</div>
 </div>
 <div class="line"><a class="reference external" href="http://www.nkavvadias.com">http://www.nkavvadias.com</a></div>
-<div class="line">Department of Computer Science and Technology</div>
-<div class="line">University of Peloponnese</div>
-<div class="line">Tripoli, Greece</div>
+<div class="line">Independent Consultant</div>
+<div class="line">Lamia, Fthiotis, Greece</div>
 </div>
 </div>
 </div>
