@@ -13,49 +13,53 @@
 +-------------------+----------------------------------------------------------+
 | **Website**       | http://www.nkavvadias.com                                |
 +-------------------+----------------------------------------------------------+
-| **Release Date**  | 13 June 2014                                             |
+| **Release Date**  | 16 October 2014                                          |
 +-------------------+----------------------------------------------------------+
-| **Version**       | 0.0.9                                                    |
+| **Version**       | 0.1.0                                                    |
 +-------------------+----------------------------------------------------------+
 | **Rev. history**  |                                                          |
 +-------------------+----------------------------------------------------------+
-|        **v0.0.1** | 21-05-2011                                               |
+|        **v0.1.0** | 2014-10-16                                               |
 |                   |                                                          |
-|                   | Initial release.                                         |
+|                   | Documentation updates and fixes.                         |
 +-------------------+----------------------------------------------------------+
-|        **v0.0.2** | 16-09-2011                                               |
+|        **v0.0.9** | 2014-06-13                                               |
 |                   |                                                          |
-|                   | Small fixes, avoids emitting redundant shift.            |
+|                   | Renamed README to README.rst.                            |
 +-------------------+----------------------------------------------------------+
-|        **v0.0.3** | 09-11-2011                                               |
-|                   |                                                          |
-|                   | Added omitted constant value for M in C routines.        |
-+-------------------+----------------------------------------------------------+
-|        **v0.0.4** | 20-11-2011                                               |
-|                   |                                                          |
-|                   | Minor README, Makefile updates.                          |
-+-------------------+----------------------------------------------------------+
-|        **v0.0.5** | 03-12-2011                                               |
-|                   |                                                          |
-|                   | Minor README updates regarding multiple releases,        |
-|                   | tutorial usage.                                          |
-+-------------------+----------------------------------------------------------+
-|        **v0.0.6** | 17-03-2012                                               |
-|                   |                                                          |
-|                   | Split build-and-test scripts to "build" and "test".      |
-+-------------------+----------------------------------------------------------+
-|        **v0.0.7** | 28-04-2013                                               |
-|                   |                                                          |
-|                   | Converted documentation to RestructuredText.             |
-+-------------------+----------------------------------------------------------+
-|        **v0.0.8** | 12-06-2014                                               |
+|        **v0.0.8** | 2014-06-12                                               |
 |                   |                                                          |
 |                   | Updated contact information. Replaced COPYING.BSD by     |
 |                   | LICENSE.                                                 |
 +-------------------+----------------------------------------------------------+
-|        **v0.0.9** | 13-06-2014                                               |
+|        **v0.0.7** | 2013-04-28                                               |
 |                   |                                                          |
-|                   | Renamed README to README.rst.                            |
+|                   | Converted documentation to RestructuredText.             |
++-------------------+----------------------------------------------------------+
+|        **v0.0.6** | 2012-03-17                                               |
+|                   |                                                          |
+|                   | Split build-and-test scripts to ``build`` and ``test``.  |
++-------------------+----------------------------------------------------------+
+|        **v0.0.5** | 2011-12-03                                               |
+|                   |                                                          |
+|                   | Minor README updates regarding multiple releases,        |
+|                   | tutorial usage.                                          |
++-------------------+----------------------------------------------------------+
+|        **v0.0.4** | 2011-11-20                                               |
+|                   |                                                          |
+|                   | Minor README, Makefile updates.                          |
++-------------------+----------------------------------------------------------+
+|        **v0.0.3** | 2011-11-09                                               |
+|                   |                                                          |
+|                   | Added omitted constant value for M in C routines.        |
++-------------------+----------------------------------------------------------+
+|        **v0.0.2** | 2011-09-16                                               |
+|                   |                                                          |
+|                   | Small fixes, avoids emitting redundant shift.            |
++-------------------+----------------------------------------------------------+
+|        **v0.0.1** | 2011-05-21                                               |
+|                   |                                                          |
+|                   | Initial release.                                         |
 +-------------------+----------------------------------------------------------+
 
 .. _Link: http://to-be-determined
@@ -64,43 +68,40 @@
 1. Introduction
 ===============
 
-"kdiv" is a generator for routines for optimized division by an integer 
+``kdiv`` is a generator for routines for optimized division by an integer 
 constant. It can be used for calculating an integer division with the routines
-presented in Henry S. Warren's "Hacker's Delight" book. "kdiv" can also be used 
-for emitting a NAC (generic assembly language) or ANSI C implementation of the 
-division.
+presented in Henry S. Warren's "Hacker's Delight" book. ``kdiv`` can also be 
+used for emitting a NAC (generic assembly language) or ANSI C implementation of 
+the division.
 
 
 2. File listing
 ===============
 
-The kdiv distribution includes the following files. Files denoted by a 
-capital S are not available in binary releases of kdiv:
+The ``kdiv`` distribution includes the following files:
 
 +---------------------+--------------------------------------------------------+
 | /kdiv               | Top-level directory                                    |
 +---------------------+--------------------------------------------------------+
-|   **S** build.sh    | Build script for kdiv (source only).                   |
+| build.sh            | Build script for ``kdiv``.                             |
 +---------------------+--------------------------------------------------------+
-|   **S** kdiv.c      | The source code for the application.                   |
+| kdiv.c              | The source code for the application.                   |
 +---------------------+--------------------------------------------------------+
-|   kdiv.exe          | Windows or Linux executable for the application.       |
+| LICENSE             | Description of the Modified BSD license.               |
 +---------------------+--------------------------------------------------------+
-|   **S** LICENSE     | Description of the Modified BSD license.               |
+| Makefile            | Makefile for generating the ``kdiv`` executable.       |
 +---------------------+--------------------------------------------------------+
-|   **S** Makefile    | Makefile for generating the kdiv executable.           |
+| README.html         | HTML version of README.rst.                            |
 +---------------------+--------------------------------------------------------+
-|   README.html       | HTML version of README.rst.                            |
+| README.pdf          | PDF version of README.rst.                             |
 +---------------------+--------------------------------------------------------+
-|   README.pdf        | PDF version of README.rst.                             |
+| README.rst          | This file.                                             |
 +---------------------+--------------------------------------------------------+
-|   README.rst        | This file.                                             |
+| test.c              | Sample test file.                                      |
 +---------------------+--------------------------------------------------------+
-|   test.c            | Sample test file.                                      |
+| test.opt.c          | Expected optimized version of ``test.c``.              |
 +---------------------+--------------------------------------------------------+
-|   test.opt.c        | Expected optimized version of test.c.                  |
-+---------------------+--------------------------------------------------------+
-|   test.sh           | Perform some sample runs.                              |
+| test.sh             | Perform some sample runs.                              |
 +---------------------+--------------------------------------------------------+
 
 
@@ -111,8 +112,8 @@ There exists a quite portable Makefile (``Makefile`` in the current directory).
 Running ``make`` from the command prompt should compile ``kdiv``.
 
 
-4. Prerequisities
-=================
+4. Prerequisites
+================
 
 - [mandatory for building] Standard UNIX-based tools
 - gcc (tested with gcc-3.4.4 on cygwin/x86)

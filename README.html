@@ -362,75 +362,79 @@ ul.auto-toc {
 <td><a class="reference external" href="http://www.nkavvadias.com">http://www.nkavvadias.com</a></td>
 </tr>
 <tr><td><strong>Release Date</strong></td>
-<td>13 June 2014</td>
+<td>16 October 2014</td>
 </tr>
 <tr><td><strong>Version</strong></td>
-<td>0.0.9</td>
+<td>0.1.0</td>
 </tr>
 <tr><td><strong>Rev. history</strong></td>
 <td>&nbsp;</td>
 </tr>
-<tr><td><strong>v0.0.1</strong></td>
-<td><p class="first">21-05-2011</p>
-<p class="last">Initial release.</p>
+<tr><td><strong>v0.1.0</strong></td>
+<td><p class="first">2014-10-16</p>
+<p class="last">Documentation updates and fixes.</p>
 </td>
 </tr>
-<tr><td><strong>v0.0.2</strong></td>
-<td><p class="first">16-09-2011</p>
-<p class="last">Small fixes, avoids emitting redundant shift.</p>
-</td>
-</tr>
-<tr><td><strong>v0.0.3</strong></td>
-<td><p class="first">09-11-2011</p>
-<p class="last">Added omitted constant value for M in C routines.</p>
-</td>
-</tr>
-<tr><td><strong>v0.0.4</strong></td>
-<td><p class="first">20-11-2011</p>
-<p class="last">Minor README, Makefile updates.</p>
-</td>
-</tr>
-<tr><td><strong>v0.0.5</strong></td>
-<td><p class="first">03-12-2011</p>
-<p class="last">Minor README updates regarding multiple releases,
-tutorial usage.</p>
-</td>
-</tr>
-<tr><td><strong>v0.0.6</strong></td>
-<td><p class="first">17-03-2012</p>
-<p class="last">Split build-and-test scripts to &quot;build&quot; and &quot;test&quot;.</p>
-</td>
-</tr>
-<tr><td><strong>v0.0.7</strong></td>
-<td><p class="first">28-04-2013</p>
-<p class="last">Converted documentation to RestructuredText.</p>
+<tr><td><strong>v0.0.9</strong></td>
+<td><p class="first">2014-06-13</p>
+<p class="last">Renamed README to README.rst.</p>
 </td>
 </tr>
 <tr><td><strong>v0.0.8</strong></td>
-<td><p class="first">12-06-2014</p>
+<td><p class="first">2014-06-12</p>
 <p class="last">Updated contact information. Replaced COPYING.BSD by
 LICENSE.</p>
 </td>
 </tr>
-<tr><td><strong>v0.0.9</strong></td>
-<td><p class="first">13-06-2014</p>
-<p class="last">Renamed README to README.rst.</p>
+<tr><td><strong>v0.0.7</strong></td>
+<td><p class="first">2013-04-28</p>
+<p class="last">Converted documentation to RestructuredText.</p>
+</td>
+</tr>
+<tr><td><strong>v0.0.6</strong></td>
+<td><p class="first">2012-03-17</p>
+<p class="last">Split build-and-test scripts to <tt class="docutils literal">build</tt> and <tt class="docutils literal">test</tt>.</p>
+</td>
+</tr>
+<tr><td><strong>v0.0.5</strong></td>
+<td><p class="first">2011-12-03</p>
+<p class="last">Minor README updates regarding multiple releases,
+tutorial usage.</p>
+</td>
+</tr>
+<tr><td><strong>v0.0.4</strong></td>
+<td><p class="first">2011-11-20</p>
+<p class="last">Minor README, Makefile updates.</p>
+</td>
+</tr>
+<tr><td><strong>v0.0.3</strong></td>
+<td><p class="first">2011-11-09</p>
+<p class="last">Added omitted constant value for M in C routines.</p>
+</td>
+</tr>
+<tr><td><strong>v0.0.2</strong></td>
+<td><p class="first">2011-09-16</p>
+<p class="last">Small fixes, avoids emitting redundant shift.</p>
+</td>
+</tr>
+<tr><td><strong>v0.0.1</strong></td>
+<td><p class="first">2011-05-21</p>
+<p class="last">Initial release.</p>
 </td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="introduction">
 <h1>1. Introduction</h1>
-<p>&quot;kdiv&quot; is a generator for routines for optimized division by an integer
+<p><tt class="docutils literal">kdiv</tt> is a generator for routines for optimized division by an integer
 constant. It can be used for calculating an integer division with the routines
-presented in Henry S. Warren's &quot;Hacker's Delight&quot; book. &quot;kdiv&quot; can also be used
-for emitting a NAC (generic assembly language) or ANSI C implementation of the
-division.</p>
+presented in Henry S. Warren's &quot;Hacker's Delight&quot; book. <tt class="docutils literal">kdiv</tt> can also be
+used for emitting a NAC (generic assembly language) or ANSI C implementation of
+the division.</p>
 </div>
 <div class="section" id="file-listing">
 <h1>2. File listing</h1>
-<p>The kdiv distribution includes the following files. Files denoted by a
-capital S are not available in binary releases of kdiv:</p>
+<p>The <tt class="docutils literal">kdiv</tt> distribution includes the following files:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="27%" />
@@ -440,20 +444,17 @@ capital S are not available in binary releases of kdiv:</p>
 <tr><td>/kdiv</td>
 <td>Top-level directory</td>
 </tr>
-<tr><td><strong>S</strong> build.sh</td>
-<td>Build script for kdiv (source only).</td>
+<tr><td>build.sh</td>
+<td>Build script for <tt class="docutils literal">kdiv</tt>.</td>
 </tr>
-<tr><td><strong>S</strong> kdiv.c</td>
+<tr><td>kdiv.c</td>
 <td>The source code for the application.</td>
 </tr>
-<tr><td>kdiv.exe</td>
-<td>Windows or Linux executable for the application.</td>
-</tr>
-<tr><td><strong>S</strong> LICENSE</td>
+<tr><td>LICENSE</td>
 <td>Description of the Modified BSD license.</td>
 </tr>
-<tr><td><strong>S</strong> Makefile</td>
-<td>Makefile for generating the kdiv executable.</td>
+<tr><td>Makefile</td>
+<td>Makefile for generating the <tt class="docutils literal">kdiv</tt> executable.</td>
 </tr>
 <tr><td>README.html</td>
 <td>HTML version of README.rst.</td>
@@ -468,7 +469,7 @@ capital S are not available in binary releases of kdiv:</p>
 <td>Sample test file.</td>
 </tr>
 <tr><td>test.opt.c</td>
-<td>Expected optimized version of test.c.</td>
+<td>Expected optimized version of <tt class="docutils literal">test.c</tt>.</td>
 </tr>
 <tr><td>test.sh</td>
 <td>Perform some sample runs.</td>
@@ -481,8 +482,8 @@ capital S are not available in binary releases of kdiv:</p>
 <p>There exists a quite portable Makefile (<tt class="docutils literal">Makefile</tt> in the current directory).
 Running <tt class="docutils literal">make</tt> from the command prompt should compile <tt class="docutils literal">kdiv</tt>.</p>
 </div>
-<div class="section" id="prerequisities">
-<h1>4. Prerequisities</h1>
+<div class="section" id="prerequisites">
+<h1>4. Prerequisites</h1>
 <ul class="simple">
 <li>[mandatory for building] Standard UNIX-based tools</li>
 <li>gcc (tested with gcc-3.4.4 on cygwin/x86)</li>
