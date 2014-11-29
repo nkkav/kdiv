@@ -4,7 +4,7 @@
  *              routines. Routines "magic" and "magicu" have been copied
  *              from Herny S. Warren's "Hacker's Delight". 
  * Author     : Nikolaos Kavvadias <nikolaos.kavvadias@gmail.com>                
- * Copyright  : (C) Nikolaos Kavvadias 2011, 2012, 2013                 
+ * Copyright  : (C) Nikolaos Kavvadias 2011, 2012, 2013, 2014                 
  * Website    : http://www.nkavvadias.com                            
  *                                                                          
  * This file is part of kdiv, and is distributed under the terms of the  
