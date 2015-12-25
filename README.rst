@@ -285,14 +285,3 @@ In order to build and run a series of sample tests do the following:
 | ``$ ./build.sh``
 | ``$ ./test.sh``
 
-
-8. Contact
-==========
-
-You may contact me for further questions/suggestions/corrections at:
-
-|  Nikolaos Kavvadias <nikos@nkavvadias.com>
-|                     <nikolaos.kavvadias@gmail.com>
-|  http://www.nkavvadias.com
-|  Independent Consultant
-|  Lamia, Fthiotis, Greece
