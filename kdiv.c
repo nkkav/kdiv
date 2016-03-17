@@ -824,12 +824,15 @@ int main(int argc, char *argv[])
     ch = 's';
   }
   sprintf(fout_name, "kdiv_%c%d_%c_%d.%s", ch, width_val, ((divisor_val > 0) ? 'p' : 'm'), ABS(divisor_val), suffix);
+
+  /* Calculate magic numbers for unsigned and signed division */
+  magu = magicu(divisor_val);
+  mags = magic(divisor_val);
   
   fout = fopen(fout_name, "w");
   
   if (enable_unsigned == 1)
   {
-    magu = magicu(divisor_val);
     if (enable_nac == 1)
     {
       emit_kdivu_nac(fout, magu.M, magu.a, magu.s, divisor_val, width_val);
@@ -841,7 +844,6 @@ int main(int argc, char *argv[])
   }
   else if (enable_signed == 1)
   {
-    mags = magic(divisor_val);
     if (enable_nac == 1)
     {
       emit_kdivs_nac(fout, mags.M, mags.s, divisor_val, width_val);
