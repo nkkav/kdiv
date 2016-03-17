@@ -655,7 +655,7 @@ static void print_usage()
 {
   printf("\n");
   printf("* Usage:\n");
-  printf("* kdiv [options]\n");
+  printf("* ./kdiv.exe [options]\n");
   printf("* \n");
   printf("* Options:\n");
   printf("* \n");
@@ -823,14 +823,8 @@ int main(int argc, char *argv[])
   {
     ch = 's';
   }
-  if (divisor_val > 0)
-  {
-    sprintf(fout_name, "kdiv_%c%d_p_%d.%s", ch, width_val, divisor_val, suffix);
-  }
-  else
-  {
-    sprintf(fout_name, "kdiv_%c%d_m_%d.%s", ch, width_val, ABS(divisor_val), suffix);
-  }
+  sprintf(fout_name, "kdiv_%c%d_%c_%d.%s", ch, width_val, ((divisor_val > 0) ? 'p' : 'm'), ABS(divisor_val), suffix);
+  
   fout = fopen(fout_name, "w");
   
   if (enable_unsigned == 1)
