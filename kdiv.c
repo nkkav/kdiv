@@ -672,10 +672,10 @@ static void print_usage()
   printf("*         Set the bitwidth of all operands: dividend, divisor and\n");
   printf("*         quotient. Default: 32.\n");
   printf("*   -lo <num>:\n");
-  printf("*         Set the lower integer bound for divident testing. Debug output (-d)\n");
+  printf("*         Set the lower integer bound for dividend testing. Debug output (-d)\n");
   printf("*         must be enabled. Default: 0.\n");
   printf("*   -hi <num>:\n");
-  printf("*         Set the higher integer bound for divident testing. Debug output (-d)\n");
+  printf("*         Set the higher integer bound for dividend testing. Debug output (-d)\n");
   printf("*         must be enabled. Default: 65535.\n");
   printf("*   -signed:\n");
   printf("*         Construct optimized routine for signed division.\n");
