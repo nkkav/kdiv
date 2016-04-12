@@ -41,7 +41,7 @@ struct ms {int M;          // Magic number
 
 int divisor_val=1, width_val=32, lo_val=0, hi_val=65535;
 int enable_debug=0, enable_errors=0;
-int enable_signed=0, enable_unsigned=1;
+int is_signed=0;
 int enable_nac=1, enable_ansic=0;
 
 
@@ -728,13 +728,11 @@ int main(int argc, char *argv[])
     }
     else if (strcmp("-unsigned", argv[i]) == 0)
     {
-      enable_unsigned = 1;
-      enable_signed   = 0;
+      is_signed = 0;
     }
     else if (strcmp("-signed", argv[i]) == 0)
     {
-      enable_unsigned = 0;
-      enable_signed   = 1;
+      is_signed = 1;
     }
     else if (strcmp("-nac", argv[i]) == 0)
     {
@@ -807,7 +805,7 @@ int main(int argc, char *argv[])
     fprintf(stderr, "Error: Requested division by zero.\n");
     exit(1);
   }
-  if ((enable_unsigned == 1) && (divisor_val < 0))
+  if ((is_signed == 0) && (divisor_val < 0))
   {
     fprintf(stderr, "Error: Divisor must be positive for unsigned division.\n");
     exit(1);
@@ -822,14 +820,8 @@ int main(int argc, char *argv[])
   {
     strcpy(suffix, "c");
   }
-  if (enable_unsigned == 1)
-  {
-    ch = 'u';
-  }
-  else if (enable_signed == 1)
-  {
-    ch = 's';
-  }
+  ch = (is_signed == 0) ? 'u' : 's';
+
   sprintf(fout_name, "kdiv_%c%d_%c_%d.%s", ch, width_val, ((divisor_val > 0) ? 'p' : 'm'), ABS(divisor_val), suffix);
 
   /* Calculate magic numbers for unsigned and signed division */
@@ -838,7 +830,7 @@ int main(int argc, char *argv[])
   
   fout = fopen(fout_name, "w");
   
-  if (enable_unsigned == 1)
+  if (is_signed == 0)
   {
     if (enable_nac == 1)
     {
@@ -849,7 +841,7 @@ int main(int argc, char *argv[])
       emit_kdivu_ansic(fout, magu.M, magu.a, magu.s, divisor_val, width_val);
     }
   }
-  else if (enable_signed == 1)
+  else
   {
     if (enable_nac == 1)
     {
@@ -860,21 +852,23 @@ int main(int argc, char *argv[])
       emit_kdivs_ansic(fout, mags.M, mags.s, divisor_val, width_val);
     }
   }  
+
   if (enable_debug == 1)
   {
     for (j = lo_val; j <= hi_val; j++)
     {
-      if (enable_unsigned == 1)
+      if (is_signed == 0)
       {
         uquotapprox = calculate_kdivu(magu.M, magu.a, magu.s, j, divisor_val, width_val);
         uquotexact  = j/divisor_val;
       }
-      else if (enable_signed == 1)
+      else
       {
         squotapprox = calculate_kdivs(mags.M, mags.s, j, divisor_val, width_val);
         squotexact  = j/divisor_val;
       }
-      if ((enable_unsigned == 1) && (uquotapprox != uquotexact))
+
+      if ((is_signed == 0) && (uquotapprox != uquotexact))
       {
         if (enable_errors == 1)
         {
@@ -882,14 +876,14 @@ int main(int argc, char *argv[])
             j, divisor_val, uquotapprox, uquotexact);
         }
       }
-      else if ((enable_unsigned == 1) && (uquotapprox == uquotexact))
+      else if ((is_signed == 0) && (uquotapprox == uquotexact))
       {
         if (enable_errors == 0)
         {
           printf("%d/%d = %d (%d)\n", j, divisor_val, uquotapprox, uquotexact);
         }
       }
-      else if ((enable_signed == 1) && (squotapprox != squotexact))
+      else if ((is_signed == 1) && (squotapprox != squotexact))
       {
         if (enable_errors == 1)
         {
@@ -897,7 +891,7 @@ int main(int argc, char *argv[])
             j, divisor_val, squotapprox, squotexact);
         }
       }
-      else if ((enable_signed == 1) && (squotapprox == squotexact))
+      else if ((is_signed == 1) && (squotapprox == squotexact))
       {
         if (enable_errors == 0)
         {
