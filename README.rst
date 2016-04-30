@@ -198,15 +198,15 @@ The complete ``kdiv`` options listing:
 
 Here follow some simple usage examples of ``kdiv``.
 
-1. Generate the ANSI C implementation of n/11 optimized routine.
+1. Generate the ANSI C implementation of the optimized routine for ``n / 11``.
 
 | ``$ ./kdiv -div 11 -width 32 -unsigned -ansic``
   
-2. Generate the NAC implementation of n/(-7) optimized routine.
+2. Generate the NAC implementation of the optimized routine for ``n / (-7)``.
 
 | ``$ ./kdiv -div -7 -width 32 -signed -ansic``
   
-3. Generate the ANSI C implementation of n/23 optimized routine. 
+3. Generate the ANSI C implementation of the optimized routine ``n / 23``. 
 Also run some tests with an internal generator for the dividend 
 range [0..1024].
 
