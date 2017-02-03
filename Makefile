@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -O2
+CFLAGS = -std=c99 -pedantic -Wall -O3
 EXE = .exe
 
 all: kdiv$(EXE)
