@@ -375,7 +375,7 @@ unsigned int calculate_kdivu(unsigned int M, int a, int s, unsigned int n, unsig
     q = t & (ipowul(2, W) - 1);
     // shrxi q, q, s        // an extended shr immediate using the carry and 
                             // q (concatenated); then performing logical shift  
-    q = t >> s;    
+    q = q >> s;    
   }
   else
   {
@@ -421,11 +421,11 @@ void emit_kdivs_nac(FILE *f, int M, int s, int d, unsigned int W)
   {
     fprintf(f, "p_");
   }
-  fprintf(f, "%d (in s%d n, out s%d y)\n", 
+  fprintf(f, "%d (in s%u n, out s%u y)\n", 
     ABS(d), W, W);
   pfprintf(f, 0, "{\n");   
-  pfprintf(f, 2, "localvar s%d q, M, c;\n", W);   
-  pfprintf(f, 2, "localvar s%d t, u, v;\n", 2*W);   
+  pfprintf(f, 2, "localvar s%u q, M, c;\n", W);   
+  pfprintf(f, 2, "localvar s%u t, u, v;\n", 2*W);   
   pfprintf(f, 0, "S_1:\n");
   
   k = log2ceil(ABS(d));
@@ -872,7 +872,7 @@ int main(int argc, char *argv[])
       {
         if (enable_errors == 1)
         {
-          printf("Result NOT exact: %d/%d = %d (%d)\n", 
+          printf("Result NOT exact: %d/%d = %u (%u)\n", 
             j, divisor_val, uquotapprox, uquotexact);
         }
       }
@@ -880,7 +880,7 @@ int main(int argc, char *argv[])
       {
         if (enable_errors == 0)
         {
-          printf("%d/%d = %d (%d)\n", j, divisor_val, uquotapprox, uquotexact);
+          printf("%d/%d = %u (%u)\n", j, divisor_val, uquotapprox, uquotexact);
         }
       }
       else if ((is_signed == 1) && (squotapprox != squotexact))
