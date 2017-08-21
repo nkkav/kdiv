@@ -89,12 +89,7 @@ int log2ceil(unsigned int inpval)
   unsigned int max = 1; // exp=0 => max=2^0=1
   unsigned int logval = 0;
 
-  if (inpval < 0)
-  {
-    fprintf(stderr, "Error: Result of log2 computation is NAN.\n");
-    exit(1);
-  }
-  else if (inpval == 0)
+  if (inpval == 0)
   {
     fprintf(stderr, "Error: Result of log2 computation is MINUS_INFINITY.\n");
     exit(1);
