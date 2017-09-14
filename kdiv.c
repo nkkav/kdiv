@@ -133,7 +133,7 @@ unsigned long long int ipowul(int base, int exponent)
  * Calculates the multiplicative inverse of an integer divisor for unsigned 
  * division.
  */
-struct mu magicu(unsigned d) {
+struct mu magicu(unsigned d, unsigned W) {
                            // Must have 1 <= d <= 2**32-1.
    int p;
    unsigned nc, delta, q1, r1, q2, r2;
@@ -141,11 +141,12 @@ struct mu magicu(unsigned d) {
 
    magu.a = 0;             // Initialize "add" indicator.
    nc = -1 - (-d)%d;       // Unsigned arithmetic here.
-   p = 31;                 // Init. p.
-   q1 = 0x80000000/nc;     // Init. q1 = 2**p/nc.
-   r1 = 0x80000000 - q1*nc;// Init. r1 = rem(2**p, nc).
-   q2 = 0x7FFFFFFF/d;      // Init. q2 = (2**p - 1)/d.
-   r2 = 0x7FFFFFFF - q2*d; // Init. r2 = rem(2**p - 1, d).
+   p = W-1;                // Init. p.
+
+   q1 = (1 << (W-1))/nc;   // Init. q1 = 2**p/nc.
+   r1 = (1 << (W-1)) - q1*nc;// Init. r1 = rem(2**p, nc).
+   q2 = ((1 << (W-1))-1)/d;      // Init. q2 = (2**p - 1)/d.
+   r2 = ((1 << (W-1))-1) - q2*d; // Init. r2 = rem(2**p - 1, d).
    do {
       p = p + 1;
       if (r1 >= nc - r1) {
@@ -155,19 +156,19 @@ struct mu magicu(unsigned d) {
          q1 = 2*q1;
          r1 = 2*r1;}
       if (r2 + 1 >= d - r2) {
-         if (q2 >= 0x7FFFFFFF) magu.a = 1;
+         if (q2 >= (unsigned)((1 << (W-1))-1)) magu.a = 1;
          q2 = 2*q2 + 1;            // Update q2.
          r2 = 2*r2 + 1 - d;}       // Update r2.
       else {
-         if (q2 >= 0x80000000) magu.a = 1;
+         if (q2 >= (unsigned)(1 << (W-1))) magu.a = 1;
          q2 = 2*q2;
          r2 = 2*r2 + 1;}
       delta = d - 1 - r2;
-   } while (p < 64 &&
+   } while (p < 2*(int)W &&
            (q1 < delta || (q1 == delta && r1 == 0)));
 
    magu.M = q2 + 1;        // Magic number
-   magu.s = p - 32;        // and shift amount to return
+   magu.s = p - W;         // and shift amount to return
    return magu;            // (magu.a was set above).
 }
 
@@ -175,17 +176,17 @@ struct mu magicu(unsigned d) {
  * Calculates the multiplicative inverse of an integer divisor for signed 
  * division.
  */
-struct ms magic(int d) {   // Must have 2 <= d <= 2**31-1
-                           // or   -2**31 <= d <= -2.
+struct ms magic(int d, unsigned W) {   // Must have 2 <= d <= 2**31-1
+                                       // or   -2**31 <= d <= -2.
    int p;
    unsigned ad, anc, delta, q1, r1, q2, r2, t;
-   const unsigned two31 = 0x80000000;     // 2**31.
+   const unsigned two31 = (1 << (W-1));     // 2**31.
    struct ms mag;
 
    ad = abs(d);
-   t = two31 + ((unsigned)d >> 31);
+   t = (1 << (W-1)) + ((unsigned)d >> (W-1));
    anc = t - 1 - t%ad;     // Absolute value of nc.
-   p = 31;                 // Init. p.
+   p = W-1;                // Init. p.
    q1 = two31/anc;         // Init. q1 = 2**p/|nc|.
    r1 = two31 - q1*anc;    // Init. r1 = rem(2**p, |nc|).
    q2 = two31/ad;          // Init. q2 = 2**p/|d|.
@@ -207,7 +208,7 @@ struct ms magic(int d) {   // Must have 2 <= d <= 2**31-1
 
    mag.M = q2 + 1;
    if (d < 0) mag.M = -mag.M; // Magic number and
-   mag.s = p - 32;            // shift amount to return.
+   mag.s = p - W;             // shift amount to return.
    return mag;
 }
 
@@ -820,8 +821,8 @@ int main(int argc, char *argv[])
   sprintf(fout_name, "kdiv_%c%d_%c_%d.%s", ch, width_val, ((divisor_val > 0) ? 'p' : 'm'), ABS(divisor_val), suffix);
 
   /* Calculate magic numbers for unsigned and signed division */
-  magu = magicu(divisor_val);
-  mags = magic(divisor_val);
+  magu = magicu(divisor_val, width_val);
+  mags = magic(divisor_val, width_val);
   
   fout = fopen(fout_name, "w");
   
@@ -898,12 +899,12 @@ int main(int argc, char *argv[])
 #ifdef EMIT_TABLES   
   for (i = 1; i < 32; i++)
   {
-    magu = magicu(i);
+    magu = magicu(i, width_val);
     printf("%03d: M = %08x a = %d s = %d\n", i, magu.M, magu.a, magu.s);
   }
   for (i = 1; i < 32; i++)
   {
-    mags = magic(i);
+    mags = magic(i, width_val);
     printf("%03d: M = %08x s = %d\n", i, mags.M, mags.s);
   }
 #endif   
