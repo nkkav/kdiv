@@ -15,6 +15,3 @@ do
   rm -rf kdiv_s32_p_${divs}.nac 
   rm -rf kdiv_s32_p_${divs}.c
 done
-
-exit 0
-

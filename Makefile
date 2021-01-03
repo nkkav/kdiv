@@ -15,4 +15,3 @@ tidy:
 
 clean:
 	rm -f *.o kdiv$(EXE) kdiv_*.nac kdiv_u*.c kdiv_s*.c
-

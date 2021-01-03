@@ -4,9 +4,9 @@
  *              routines. Routines "magic" and "magicu" have been copied
  *              from Herny S. Warren's "Hacker's Delight". 
  * Author     : Nikolaos Kavvadias <nikolaos.kavvadias@gmail.com>                
- * Copyright  : (C) Nikolaos Kavvadias 2011, 2012, 2013, 2014, 2015, 2016, 2017                
+ * Copyright  : (C) Nikolaos Kavvadias 2011-2021
  * Website    : http://www.nkavvadias.com                            
- *                                                                          
+ *
  * This file is part of kdiv, and is distributed under the terms of the  
  * Modified BSD License.
  *
@@ -17,7 +17,7 @@
  * kdiv is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the Modified BSD License for more details.
- * 
+ *
  * You should have received a copy of the Modified BSD License along with 
  * kdiv. If not, see <http://www.gnu.org/licenses/>. 
  */
@@ -39,15 +39,14 @@ struct ms {int M;          // Magic number
           int s;};         // and shift amount.         
 // ---------------------------- end cut --------------------------------
 
-int divisor_val=1, width_val=32, lo_val=0, hi_val=65535;
+int divisor=1, width=32, lo=0, hi=65535;
 int enable_debug=0, enable_errors=0;
 int is_signed=0;
 int enable_nac=1, enable_ansic=0;
 
 
-/* print_spaces:
- * Print a configurable number of space characters to an output file (specified 
- * by the given filename; the file is assumed already opened).
+/*! Print a configurable number of space characters to an output file (specified 
+ *  by the given filename; the file is assumed already opened).
  */
 void print_spaces(FILE *f, int nspaces)
 {
@@ -58,8 +57,7 @@ void print_spaces(FILE *f, int nspaces)
   }
 }
 
-/* pfprintf: 
- * fprintf prefixed by a number of space characters. 
+/*! fprintf prefixed by a number of space characters. 
  */
 void pfprintf(FILE *f, int nspaces, char *fmt, ...)
 {
@@ -70,8 +68,7 @@ void pfprintf(FILE *f, int nspaces, char *fmt, ...)
   va_end(args);
 }
 
-/* ispowof2:
- * Function to identify if the given unsigned integer is a power-of-2.
+/*! Function to identify if the given unsigned integer is a power-of-2.
  */
 int ispowof2(unsigned int v)
 {
@@ -80,13 +77,11 @@ int ispowof2(unsigned int v)
   return (f);
 }
 
-/* log2ceil:
- * Function to calculate the ceiling of the binary logarithm of a given positive 
- * integer n.
+/*! Function to calculate the ceiling of the binary logarithm of a given positive 
+ *  integer n.
  */
 int log2ceil(unsigned int inpval)
 {
-  unsigned int max = 1; // exp=0 => max=2^0=1
   unsigned int logval = 0;
 
   if (inpval == 0)
@@ -97,6 +92,7 @@ int log2ceil(unsigned int inpval)
   // inpval is positive
   else
   {
+    unsigned int max = 1; // exp=0 => max=2^0=1
     // log computation loop
     while (max < inpval)
     {
@@ -111,8 +107,7 @@ int log2ceil(unsigned int inpval)
   return (logval);
 }
 
-/* ipowul:
- * Calculate integer power supporting results up to 64-bits.
+/*! Calculate integer power supporting results up to 64-bits.
  */
 unsigned long long int ipowul(int base, int exponent)
 {
@@ -129,9 +124,8 @@ unsigned long long int ipowul(int base, int exponent)
   return (temp);
 }
 
-/* magicu:
- * Calculates the multiplicative inverse of an integer divisor for unsigned 
- * division.
+/*! Calculates the multiplicative inverse of an integer divisor for unsigned
+ *  division.
  */
 struct mu magicu(unsigned d, unsigned W) {
                            // Must have 1 <= d <= 2**32-1.
@@ -172,9 +166,8 @@ struct mu magicu(unsigned d, unsigned W) {
    return magu;            // (magu.a was set above).
 }
 
-/* magic:
- * Calculates the multiplicative inverse of an integer divisor for signed 
- * division.
+/*! Calculates the multiplicative inverse of an integer divisor for signed
+ *  division.
  */
 struct ms magic(int d, unsigned W) {   // Must have 2 <= d <= 2**31-1
                                        // or   -2**31 <= d <= -2.
@@ -212,7 +205,7 @@ struct ms magic(int d, unsigned W) {   // Must have 2 <= d <= 2**31-1
    return mag;
 }
 
-/* 
+/*! 
    NOTES on unsigned division by constant.
 1) Unsigned division by powers-of-2, with d = 2^k
   shr   q, n, k
@@ -230,9 +223,8 @@ struct ms magic(int d, unsigned W) {   // Must have 2 <= d <= 2**31-1
                             // q (concatenated); then performing logical shift
 */     
 
-/* emit_kdivu_nac:
- * Emit the NAC (generic assembly language) implementation of unsigned division 
- * by constant.
+/*! Emit the NAC (generic assembly language) implementation of unsigned division 
+ *  by constant.
  */
 void emit_kdivu_nac(FILE *f, unsigned int M, int a, int s, unsigned int d, unsigned int W)
 { 
@@ -276,7 +268,6 @@ void emit_kdivu_nac(FILE *f, unsigned int M, int a, int s, unsigned int d, unsig
     pfprintf(f, 2, "n0 <= zxt n;\n");
     pfprintf(f, 2, "t0 <= add t0, n0;\n");
     pfprintf(f, 2, "q <= trunc t0;\n");    
-//    pfprintf(f, 2, "q <= and t, %u;\n", 0xFFFFFFFF);
     // shrxi q, q, s        // an extended shr immediate using the carry and 
                             // q (concatenated); then performing logical shift  
     pfprintf(f, 2, "q <= shr q, %d;\n", s);
@@ -290,8 +281,7 @@ void emit_kdivu_nac(FILE *f, unsigned int M, int a, int s, unsigned int d, unsig
   pfprintf(f, 0, "}\n"); 
 }
 
-/* emit_kdivu_ansic:
- * Emit the ANSI C implementation of unsigned division by constant.
+/*! Emit the ANSI C implementation of unsigned division by constant.
  */                       
 void emit_kdivu_ansic(FILE *f, unsigned int M, int a, int s, unsigned int d, unsigned int W)
 {
@@ -339,9 +329,8 @@ void emit_kdivu_ansic(FILE *f, unsigned int M, int a, int s, unsigned int d, uns
   pfprintf(f, 0, "}\n");
 }
 
-/* calculate_kdivu:
- * Perform an unsigned division by constant according to "Hacker's Delight" 
- * routines.
+/*! Perform an unsigned division by constant according to "Hacker's Delight"
+ *  routines.
  */
 unsigned int calculate_kdivu(unsigned int M, int a, int s, unsigned int n, unsigned int d, unsigned int W)
 {
@@ -381,7 +370,7 @@ unsigned int calculate_kdivu(unsigned int M, int a, int s, unsigned int n, unsig
   return (q);
 }
 
-/* 
+/*!
    NOTES on signed division by constant.
 4) Signed division for non-powers-of-2
   li    M, dinv
@@ -400,9 +389,8 @@ unsigned int calculate_kdivu(unsigned int M, int a, int s, unsigned int n, unsig
   neg   q, q                // for negative divisors (d < 0)
 */     
 
-/* emit_kdivs_nac:
- * Emit the NAC (generic assembly language) implementation of signed division 
- * by constant.
+/*! Emit the NAC (generic assembly language) implementation of signed division 
+ *  by constant.
  */                       
 void emit_kdivs_nac(FILE *f, int M, int s, int d, unsigned int W)
 {
@@ -441,7 +429,6 @@ void emit_kdivs_nac(FILE *f, int M, int s, int d, unsigned int W)
     pfprintf(f, 2, "t <= sxt n;\n");
     pfprintf(f, 2, "t <= shr t, %d;\n", k-1);   
     // shri  t, t, W-k
-//    u = t >> (W-k);
     pfprintf(f, 2, "u <= shr t, %d;\n", W-k);
     // add   t, n, t
     pfprintf(f, 2, "v <= sxt n;\n");
@@ -472,16 +459,13 @@ void emit_kdivs_nac(FILE *f, int M, int s, int d, unsigned int W)
       pfprintf(f, 2, "q <= sub q, n;\n");
     }
     // shrsi q, q, s
-//      q = q >> s;
     if (s > 0)
     {
       pfprintf(f, 2, "q <= shr q, %d;\n", s);
     }
     // shri  t, n, W-1           // W is the word length
-//    c = n >> (W-1);
     pfprintf(f, 2, "c <= shr n, %d;\n", W-1);
     // add   q, q, t
-//    q = q + c;
     pfprintf(f, 2, "q <= add q, c;\n");
     // add   q, q, 1             // for negative divisors (d < 0) and (n != 0)
     if (d < 0)
@@ -494,8 +478,7 @@ void emit_kdivs_nac(FILE *f, int M, int s, int d, unsigned int W)
   pfprintf(f, 0, "}\n"); 
 }
 
-/* emit_kdivs_ansic:
- * Emit the ANSI C implementation of signed division by constant.
+/*! Emit the ANSI C implementation of signed division by constant.
  */  
 void emit_kdivs_ansic(FILE *f, int M, int s, int d, unsigned int W)
 {
@@ -686,16 +669,13 @@ static void print_usage()
   printf("* http://www.nkavvadias.com\n");
 }
 
-/* main:
- * Program entry.
+/*! Program entry.
  */
 int main(int argc, char *argv[]) 
 {
    struct mu magu;
    struct ms mags;
-   int i, j;
-   unsigned int uquotapprox=0, uquotexact=0;   
-   int squotapprox=0, squotexact=0;
+   int i;
    FILE *fout;
    char *fout_name, suffix[4], ch='X';
 
@@ -707,7 +687,7 @@ int main(int argc, char *argv[])
    }
    
   // Read input arguments
-  for (i=1; i < argc; i++)
+  for (i = 1; i < argc; i++)
   {
     if (strcmp("-h", argv[i]) == 0)
     {
@@ -745,7 +725,7 @@ int main(int argc, char *argv[])
       if ((i+1) < argc)
       {
         i++;
-        divisor_val = atoi(argv[i]);
+        divisor = atoi(argv[i]);
       }
     }    
     else if (strcmp("-width",argv[i]) == 0)
@@ -753,7 +733,7 @@ int main(int argc, char *argv[])
       if ((i+1) < argc)
       {
         i++;
-        width_val = atoi(argv[i]);
+        width = atoi(argv[i]);
       }
     }    
     else if (strcmp("-lo",argv[i]) == 0)
@@ -763,11 +743,11 @@ int main(int argc, char *argv[])
         i++;
         if (argv[i][0] == '-')
         {
-          lo_val = -atoi(argv[i]+1);
+          lo = -atoi(argv[i]+1);
         }
         else
         {
-          lo_val = atoi(argv[i]);
+          lo = atoi(argv[i]);
         }
       }
     }    
@@ -778,11 +758,11 @@ int main(int argc, char *argv[])
         i++;
         if (argv[i][0] == '-')
         {
-          hi_val = -atoi(argv[i]+1);
+          hi = -atoi(argv[i]+1);
         }
         else
         {
-          hi_val = atoi(argv[i]);
+          hi = atoi(argv[i]);
         }
       }
     }    
@@ -796,12 +776,12 @@ int main(int argc, char *argv[])
     }
   }
   
-  if (divisor_val == 0)
+  if (divisor == 0)
   {
     fprintf(stderr, "Error: Requested division by zero.\n");
     exit(1);
   }
-  if ((is_signed == 0) && (divisor_val < 0))
+  if ((is_signed == 0) && (divisor < 0))
   {
     fprintf(stderr, "Error: Divisor must be positive for unsigned division.\n");
     exit(1);
@@ -818,11 +798,11 @@ int main(int argc, char *argv[])
   }
   ch = (is_signed == 0) ? 'u' : 's';
 
-  sprintf(fout_name, "kdiv_%c%d_%c_%d.%s", ch, width_val, ((divisor_val > 0) ? 'p' : 'm'), ABS(divisor_val), suffix);
+  sprintf(fout_name, "kdiv_%c%d_%c_%d.%s", ch, width, ((divisor > 0) ? 'p' : 'm'), ABS(divisor), suffix);
 
   /* Calculate magic numbers for unsigned and signed division */
-  magu = magicu(divisor_val, width_val);
-  mags = magic(divisor_val, width_val);
+  magu = magicu(divisor, width);
+  mags = magic(divisor, width);
   
   fout = fopen(fout_name, "w");
   
@@ -830,38 +810,40 @@ int main(int argc, char *argv[])
   {
     if (enable_nac == 1)
     {
-      emit_kdivu_nac(fout, magu.M, magu.a, magu.s, divisor_val, width_val);
+      emit_kdivu_nac(fout, magu.M, magu.a, magu.s, divisor, width);
     }
     else if (enable_ansic == 1)
     {
-      emit_kdivu_ansic(fout, magu.M, magu.a, magu.s, divisor_val, width_val);
+      emit_kdivu_ansic(fout, magu.M, magu.a, magu.s, divisor, width);
     }
   }
   else
   {
     if (enable_nac == 1)
     {
-      emit_kdivs_nac(fout, mags.M, mags.s, divisor_val, width_val);
+      emit_kdivs_nac(fout, mags.M, mags.s, divisor, width);
     }
     else if (enable_ansic == 1)
     {
-      emit_kdivs_ansic(fout, mags.M, mags.s, divisor_val, width_val);
+      emit_kdivs_ansic(fout, mags.M, mags.s, divisor, width);
     }
-  }  
+  }
 
   if (enable_debug == 1)
   {
-    for (j = lo_val; j <= hi_val; j++)
+    unsigned int uquotapprox=0, uquotexact=0;   
+    int squotapprox=0, squotexact=0;
+    for (i = lo; i <= hi; i++)
     {
       if (is_signed == 0)
       {
-        uquotapprox = calculate_kdivu(magu.M, magu.a, magu.s, j, divisor_val, width_val);
-        uquotexact  = j/divisor_val;
+        uquotapprox = calculate_kdivu(magu.M, magu.a, magu.s, i, divisor, width);
+        uquotexact  = i/divisor;
       }
       else
       {
-        squotapprox = calculate_kdivs(mags.M, mags.s, j, divisor_val, width_val);
-        squotexact  = j/divisor_val;
+        squotapprox = calculate_kdivs(mags.M, mags.s, i, divisor, width);
+        squotexact  = i/divisor;
       }
 
       if ((is_signed == 0) && (uquotapprox != uquotexact))
@@ -869,14 +851,14 @@ int main(int argc, char *argv[])
         if (enable_errors == 1)
         {
           printf("Result NOT exact: %d/%d = %u (%u)\n", 
-            j, divisor_val, uquotapprox, uquotexact);
+            i, divisor, uquotapprox, uquotexact);
         }
       }
       else if ((is_signed == 0) && (uquotapprox == uquotexact))
       {
         if (enable_errors == 0)
         {
-          printf("%d/%d = %u (%u)\n", j, divisor_val, uquotapprox, uquotexact);
+          printf("%d/%d = %u (%u)\n", i, divisor, uquotapprox, uquotexact);
         }
       }
       else if ((is_signed == 1) && (squotapprox != squotexact))
@@ -884,27 +866,27 @@ int main(int argc, char *argv[])
         if (enable_errors == 1)
         {
           printf("Result NOT exact: %d/%d = %d (%d)\n", 
-            j, divisor_val, squotapprox, squotexact);
+            i, divisor, squotapprox, squotexact);
         }
       }
       else if ((is_signed == 1) && (squotapprox == squotexact))
       {
         if (enable_errors == 0)
         {
-          printf("%d/%d = %d (%d)\n", j, divisor_val, squotapprox, squotexact);
+          printf("%d/%d = %d (%d)\n", i, divisor, squotapprox, squotexact);
         }
       }
     }
-  }   
-#ifdef EMIT_TABLES   
+  }
+#ifdef EMIT_TABLES
   for (i = 1; i < 32; i++)
   {
-    magu = magicu(i, width_val);
+    magu = magicu(i, width);
     printf("%03d: M = %08x a = %d s = %d\n", i, magu.M, magu.a, magu.s);
   }
   for (i = 1; i < 32; i++)
   {
-    mags = magic(i, width_val);
+    mags = magic(i, width);
     printf("%03d: M = %08x s = %d\n", i, mags.M, mags.s);
   }
 #endif   

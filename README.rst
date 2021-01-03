@@ -17,7 +17,7 @@
 +-------------------+----------------------------------------------------------+
 | **Release Date**  | 14 September 2017                                        |
 +-------------------+----------------------------------------------------------+
-| **Version**       | 0.1.2                                                    |
+| **Version**       | 0.1.3                                                    |
 +-------------------+----------------------------------------------------------+
 | **Rev. history**  |                                                          |
 +-------------------+----------------------------------------------------------+
@@ -283,8 +283,8 @@ This file is compiled and run as follows with one additional argument:
 | ``$ gcc -Wall -O2 -o test.opt.exe test.opt.c``
 | ``$ ./test.opt.exe 155``
  
-The target platform compiler (e.g. ``gcc`` or ``llvm``) is expected to inline the 
-``kdiv_s32_p_23`` function at its call site.
+The target platform compiler (e.g., ``gcc`` or ``llvm``) is expected to inline
+the ``kdiv_s32_p_23`` function at its call site.
 
 
 7. Running tests
@@ -295,8 +295,6 @@ In order to build and run a series of sample tests do the following:
 | ``$ ./build.sh``
 | ``$ ./test.sh``
 
-
 To clean-up the produced files from ``test.sh`` and only these use:
 
 | ``$ ./clean.sh``
-
